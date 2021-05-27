@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t udeshyagiri/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true udeshyagiri/react-test npm run test
+
+after_success:
+  - docker built -t udeshyagiri/fibo-client ./client
+  - docker built -t udeshyagiri/fibo-nginx ./nginx
+  - docker built -t udeshyagiri/fibo-server ./server
+  - docker built -t udeshyagiri/fibo-worker ./worker
+  # Log in to the docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push udeshyagiri/fibo-client
+  - docker push udeshyagiri/fibo-nginx
+  - docker push udeshyagiri/fibo-server
+  - docker push udeshyagiri/fibo-worker
