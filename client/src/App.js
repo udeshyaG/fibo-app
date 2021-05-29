@@ -13,9 +13,8 @@ function App() {
           <Link to='/otherpage'>Other Page</Link>
         </header>
 
-        <Route exact path='/' component={Fib}>
-          <Route exact path='/otherpage' component={OtherPage}></Route>
-        </Route>
+        <Route exact path='/' component={Fib}></Route>
+        <Route exact path='/otherpage' component={OtherPage}></Route>
       </div>
     </Router>
   );
