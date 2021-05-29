@@ -46,3 +46,11 @@ services:
       context: ./nginx
     ports:
       - '3050:80'
+# AWS setting
+# db identifier = fibo-docker-postgres
+# username = postgres
+# password = postgrespassword
+# initial db name = fibvalues
+
+# Redis
+# name = fibo-docker-redis
